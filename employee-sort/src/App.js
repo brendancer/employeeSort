@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "./utils/API";
 import Table from "./components/Table";
-// import EmployeeRow from "./components/EmployeeRow";
-// import Search from "./components/Search";
+import EmployeeRow from "./components/EmployeeRow";
+import Search from "./components/Search";
 
 function App() {
   const [empArr, setEmpArr] = useState([]);
@@ -77,8 +77,18 @@ function App() {
 
   return (
     <>
-      <Table handleSort={handleSort} />
+      <Search handleSearch={handleSearch} />
+      {!empSortArr.length === 0 ? (
+        <h1> Loading</h1>
+      ) : (
+        <Table handleSort={handleSort}>
+          {empSortArr.map((emp) => {
+            return <EmployeeRow key={emp.login.uuid} emp={emp} />;
+          })}
+        </Table>
+      )}
     </>
   );
 }
+
 export default App;

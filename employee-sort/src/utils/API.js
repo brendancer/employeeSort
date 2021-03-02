@@ -1,7 +1,7 @@
 import axios from "axios";
-const SEED = "such_a_good_seed";
+
 const BASEURL = "https://randomuser.me/api/";
-const URLOPTIONS = `?page=1&results=25&seed=${SEED}`;
+const URLOPTIONS = `?page=1&results=25&nat=us`;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
