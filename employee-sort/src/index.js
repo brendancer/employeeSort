@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import DirectoryContainer from "./components/DirectoryContainer";
+import App from "./App.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <DirectoryContainer />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

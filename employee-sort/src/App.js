@@ -1,29 +1,59 @@
-import React, { useEffect, useState } from "react";
-import Table from "./components/Table";
-import EmployeeList from "./components/EmployeeList";
-import API from "./utils/API";
+import React, { useState, useEffect } from 'react';
+import API from './utils/API';
+import Table from './components/Table';
+import EmployeeRow from './components/EmployeeRow';
+import Search from './components/Search';
 
 function App() {
 
-  const [empArray, setEmpArray] = useState([]);
-  const [sortEmpArray, setSortEmpArray] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState([])
-  const [sortAlphaAz, setSortAlphAz] = useState([])
+  const [empArr, setEmpArr] = useState([]);
+  const [empSortArr, setEmpSortArr] = useState([]);
+  const [sortType, setSortType] = useState('name');
+  const [sortDesc, setSortDesc] = useState(false);
+  const [searchFilter, setSearchFilter] = useState('');
 
   useEffect(() => {
+
     API.search()
-    .then(res => {
-      sept
-    })
-  }
-  return (
-    <div className="App">
-      <>
-        <Table />
-        <EmployeeList />
-      </>
-    </div>
-  );
-}
+      .then(res => {
+        setEmpArr(res.data.results);
+        setEmpSortArr(res.data.results);
+      })
+  }, []);
+
+  useEffect(() => {
+    const sortUp = sortDesc ? 1 : -1;
+    const sortDown = sortDesc ? -1 : 1;
+    let arr = []
+    switch (sortType) {
+      case 'picture[thumbnail]':
+        arr = [...empSortArr].sort((a, b) => (a.picture.thumbnail < b.picture.thumbnail) ? sortUp : sortDown);
+        break;
+      case 'name[first]':
+        arr = [...empSortArr].sort((a, b) => (a.name.first < b.name.first) ? sortUp : sortDown);
+        break;
+      case 'dob[date]':
+        arr = [...empSortArr].sort((a, b) => (a.dob.date < b.dob.date) ? sortUp : sortDown);
+        break;
+      default:
+        arr = [...empSortArr].sort((a, b) => (a[sortType] < b[sortType]) ? sortUp : sortDown);
+        break;
+    }
+    arr = [...empSortArr].filter((emp) => {
+      return (emp.name.first.includes(searchFilter) || emp.name.last.includes(searchFilter) || emp.phone.includes(searchFilter) || emp.email.includes(searchFilter) || emp.dob.date.includes(searchFilter));
+    });
+    setEmpSortArr(arr);
+  }, [sortType, sortDesc, searchFilter]);
+
+  
+//   return (
+//     <div className="App">
+//       <>
+//         <Table />
+//         <EmployeeList />
+//       </>
+//     </div>
+//   );
+// }
 
 export default App;
