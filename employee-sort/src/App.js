@@ -54,6 +54,31 @@ function App() {
       );
     });
     setEmpSortArr(arr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortType, sortDesc, searchFilter]);
+
+  const handleSort = (sort) => {
+    if (sortType === sort) {
+      setSortDesc(!sortDesc);
+    } else {
+      setSortDesc(false);
+    }
+    setSortType(sort);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (e.target.value === "") {
+      setEmpSortArr(empArr);
+    } else {
+      setSearchFilter(e.target.value);
+    }
+  };
+
+  return (
+    <>
+      <Table handleSort={handleSort} />
+    </>
+  );
 }
 export default App;
