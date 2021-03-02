@@ -24,14 +24,14 @@ function App() {
     let ascArray = [...empArray].sort((a, b) =>
       a.name.first > b.name.first ? 1 : -1
     );
-    setEmpArray(ascArray);
+    setEmpArray(ascArrayFirst);
   }
 
   function sortAscLast() {
     let ascArray = [...empArray].sort((a, b) =>
       a.name.last > b.name.last ? 1 : -1
     );
-    setEmpArray(ascArray);
+    setEmpArray(ascArrayLast);
   }
 
   return (
@@ -39,8 +39,8 @@ function App() {
       <Header />
       <Table
         empArray={empArray}
-        sortAscFirstProps={sortAscFirst()}
-        sortAscLastProps={sortAscLast()}
+        ascArrayFirstProps={ascArrayFirst}
+        ascArrayLastProps={ascArrayLast}
       />
     </>
   );
