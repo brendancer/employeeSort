@@ -3,11 +3,13 @@ import React from "react";
 function Search(props) {
   return (
     <input
-      classname="form-control mr-sm-2"
+      className="form-control mr-sm-2"
       type="search"
-      palceholder="search"
+      placeholder="Search"
+      aria-label="Search"
       onChange={props.handleSearch}
     />
   );
 }
+
 export default Search;

@@ -1,6 +1,7 @@
 import React from "react";
+
 function EmployeeRow(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <tr>
       <td>
