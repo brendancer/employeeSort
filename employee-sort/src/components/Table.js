@@ -2,14 +2,26 @@ import React, { useState, useEffect } from "react";
 
 function Table(props) {
   const [tableArray, setTableArray] = useState([]);
+  const [firstNameArray, setFirstNameArray] = useState([]);
+  const [lastNameArray, setLastNameArray] = useState([]);
 
   useEffect(() => {
     setTableArray(props.empArray);
     console.log(tableArray);
-  });
-  // const sortFirst = (props) => {
-  //   empArrayProps.sort((a, b) => (a.name.first > b.name.first ? 1 : -1));
-  // };
+  }, []);
+
+  function handleFirstSort() {
+    let firstName = tableArray.sort((a, b) =>
+      a.name.first > b.name.first ? 1 : -1
+    );
+    setFirstNameArray(firstName);
+  }
+  function handleLastSort() {
+    let lastName = tableArray.sort((a, b) =>
+      a.name.last > b.name.last ? 1 : -1
+    );
+    setLastNameArray(lastName);
+  }
 
   // const sortLast = (props) => {
   //   let lastNameArray = props.empArray.sort((a, b) =>
@@ -20,8 +32,8 @@ function Table(props) {
 
   return (
     <>
-      {/* <button onClick={sortFirst}>Sort by First Name</button>;
-      <button onClick={sortLast}>Sort by Last Name</button>; */}
+      <button onClick={handleFirstSort}>Sort by First Name</button>
+      <button onClick={handleLastSort}>Sort by Last Name</button>
       <table className="table table-striped">
         <thead>
           <tr>
