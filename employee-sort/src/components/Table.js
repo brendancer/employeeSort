@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Table(props) {
+  console.log(props);
+  const [tableArray, setTableArray] = useState([]);
+
+  setTableArray(props.empArray.e);
+  console.log(tableArray);
+
+  console.log(tableArray);
+
   return (
     <>
-      <button onClick={props.sortAscFirst}>Sort by First Name</button>
-      <button onClick={props.sortAscLast}>Sort by Last Name</button>
-
       <table className="table table-striped">
         <thead>
           <tr>
@@ -15,11 +20,11 @@ function Table(props) {
           </tr>
         </thead>
         <tbody>
-          {props.empArray.map((props) => (
-            <tr key={props.login.uuid}>
-              <td>{props.name.first}</td>
-              <td>{props.name.last}</td>
-              <td>{props.email}</td>
+          {tableArray.map((employees) => (
+            <tr key={employees.login.uuid}>
+              <td>{employees.name.first}</td>
+              <td>{employees.name.last}</td>
+              <td>{employees.email}</td>
             </tr>
           ))}
         </tbody>
